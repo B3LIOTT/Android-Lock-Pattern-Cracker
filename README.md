@@ -4,7 +4,7 @@ I developped this script in order to solve a Root Me challenge.
 # Usage
 1 - Find the `gesture.key` file in your android system. It might be in `android/data/system`.
 2 - Use `attack.py` to crack the lock pattern:
-```bash
+```txt
 attack.py [-v] [-p hash ] or [-f file.key ]
 -v : verbose mode
 -p : hash value in hex
