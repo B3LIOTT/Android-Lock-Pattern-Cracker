@@ -36,9 +36,9 @@ attack.py [-v] [-p hash ] or [-f file.key ]
 # Example
 In this repo, you will find a `gesture.key` file to try this script:
 ```bash
-python attack.py -v -f path/to/android/data/system/gesture.key
+python attack.py -v -f path/to/gesture.key
 ```
 or without verbose:
 ```bash
-python attack.py -f path/to/android/data/system/gesture.key
+python attack.py -f path/to/gesture.key
 ```
