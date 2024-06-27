@@ -23,25 +23,29 @@ def attack(hash_type: HashType, hash: str):
     print("Hash: ", hash)
 
     if hash_type == HashType.SHA1:
-        vals = NODES.keys()
-        length = len(vals)
-        start = perf_counter()
+        hash_func = sha1
+    elif hash_type == HashType.SHA256:
+        hash_func = sha256
+    
+    vals = NODES.keys()
+    length = len(vals)
+    start = perf_counter()
 
-        for i in range(2, length+1):
-            if VERBOSE:
-                print("\n\nTrying with ", i, " nodes")
+    for i in range(2, length+1):
+        if VERBOSE:
+            print("\n\nTrying with ", i, " nodes")
 
-            perms = itertools.permutations(vals, i)
-            
-            size = factorial(i)*comb(length, i)
-            iterator = tqdm(perms, total=size) if VERBOSE else perms
+        perms = itertools.permutations(vals, i)
+        
+        size = factorial(i)*comb(length, i)
+        iterator = tqdm(perms, total=size) if VERBOSE else perms
 
-            for perm in iterator:
-                perm = ''.join(perm).encode('utf-8')
-                computed_hash = sha1(perm).hexdigest()
+        for perm in iterator:
+            perm = ''.join(perm).encode('utf-8')
+            computed_hash = hash_func(perm).hexdigest()
 
-                if computed_hash == hash:
-                    return perm, perf_counter()-start
+            if computed_hash == hash:
+                return perm, perf_counter()-start
                 
     raise ValueError("Pattern not found")
 
